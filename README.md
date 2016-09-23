@@ -1,3 +1,3 @@
 # js-vanilla-tools
 
-List of convenient function who not necessary jQuery.
+List of commonly used function which does not need jQuery.
