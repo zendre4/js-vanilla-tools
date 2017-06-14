@@ -6,7 +6,7 @@ var rename=require('gulp-rename');
 gulp.task('generateDist', function() {
 
     return gulp.src(
-        "./src/vanilla-tools.js"
+        "./src/js-vanilla-tools.js"
     ).pipe(uglify({preserveComments:"license"}))
         .pipe(rename({suffix: ".min"}))
      .pipe(gulp.dest("./dist"));
