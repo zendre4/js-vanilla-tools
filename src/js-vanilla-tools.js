@@ -8,7 +8,7 @@
  * Compatibility IE9+
  * @namespace VanillaTools
  * @author Julien Stalder
- * @version 1.1.1
+ * @version 1.2.1
  */
 var VanillaTools = {
 
