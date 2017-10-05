@@ -8,7 +8,7 @@
  * Compatibility IE9+
  * @namespace VanillaTools
  * @author Julien Stalder
- * @version 1.2.1
+ * @version 1.3.0
  */
 var VanillaTools = {
 
@@ -58,7 +58,7 @@ var VanillaTools = {
         }
 
         var request = new XMLHttpRequest();
-        request.open(options.method, url, true);
+        request.open(options.method, url, options.async);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
         request.onreadystatechange  = function () {
             if (this.readyState === 4) {
@@ -323,6 +323,7 @@ var VanillaTools = {
      */
     _getJsonDefaultOptions : {
         data :{},
-        method: "POST"
+        method: "POST",
+        async:true
     }
 };
