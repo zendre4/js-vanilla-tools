@@ -175,7 +175,7 @@ var VanillaTools = {
 
     /**
      * Add a css class to an element
-     * @param {object} element - the concerned html element
+     * @param {HTMLElement} element - the concerned html element
      * @param {string} className - the class that will be added
      * @static
      */
@@ -190,7 +190,7 @@ var VanillaTools = {
 
     /**
      * Remove a css class of an element
-     * @param {object} element - the concerned html element
+     * @param {HTMLElement} element - the concerned html element
      * @param {null|string} [className] - the class that will be removed
      * @static
      */
@@ -208,7 +208,7 @@ var VanillaTools = {
 
     /**
      * Toggle a css class of an element
-     * @param {object} element - the concerned html element
+     * @param {HTMLElement} element - the concerned html element
      * @param {string} className - the class that will be added/removed
      * @static
      */
@@ -236,7 +236,7 @@ var VanillaTools = {
 
     /**
      * Get element has css class
-     * @param {object} element - the concerned html element
+     * @param {HTMLElement} element - the concerned html element
      * @param {string} className - the class that will be tested
      * @return {boolean}
      * @static
@@ -251,7 +251,7 @@ var VanillaTools = {
 
     /**
      * Toggle two class on a element
-     * @param {object} element - the concerned html element
+     * @param {HTMLElement} element - the concerned html element
      * @param {string} className1 - the first class that will be added/removed
      * @param {string} className2 - the second class that will be added/removed
      * @static
@@ -271,7 +271,7 @@ var VanillaTools = {
 
     /**
      * Empty the content of an element
-     * @param {object} element - the concerned html element
+     * @param {HTMLElement} element - the concerned html element
      * @static
      */
     emptyElement: function (element) {
