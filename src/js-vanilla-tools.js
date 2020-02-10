@@ -8,7 +8,7 @@
  * Compatibility IE9+
  * @namespace VanillaTools
  * @author Julien Stalder
- * @version 1.3.0
+ * @version 1.4.0
  */
 var VanillaTools = {
 
@@ -32,37 +32,37 @@ var VanillaTools = {
      * @return {object}
      * @static
      */
-    getJSON : function(url,options,successFunction,errorFunction){
+    getJSON: function (url, options, successFunction, errorFunction) {
 
-        var parameters=this.cloneObject(this._getJsonDefaultOptions);
+        var parameters = this.cloneObject(this._getJsonDefaultOptions);
 
         //replace default options by defined options
-        if(typeof options === 'object') {
+        if (typeof options === 'object') {
             for (var key in options) {
-                if (options.hasOwnProperty(key) && typeof parameters[key] !="undefined"){
+                if (options.hasOwnProperty(key) && typeof parameters[key] !== "undefined") {
                     parameters[key] = options[key];
                 }
             }
         }
-        parameters.method=parameters.method.toUpperCase();
-        options=parameters;
+        parameters.method = parameters.method.toUpperCase();
+        options = parameters;
 
-        var data=this._serializeAjaxParameter(options.data);
+        var data = this._serializeAjaxParameter(options.data);
 
-        if(options.method=="GET" && data){
-            if(url.indexOf("?") <0) {
-                url+="?"+data;
-            }else{
-                url+="&"+data;
+        if (options.method === "GET" && data) {
+            if (url.indexOf("?") < 0) {
+                url += "?" + data;
+            } else {
+                url += "&" + data;
             }
         }
 
         var request = new XMLHttpRequest();
         request.open(options.method, url, options.async);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-        request.onreadystatechange  = function () {
+        request.onreadystatechange = function () {
             if (this.readyState === 4) {
-                if (request.status == 200) {
+                if (request.status === 200) {
                     callSuccessFunction(request);
                 } else {
                     if (typeof errorFunction != "undefined") {
@@ -72,25 +72,25 @@ var VanillaTools = {
             }
         };
 
-        function callErrorFunction(){
+        function callErrorFunction() {
             if (typeof errorFunction != "undefined") {
                 errorFunction();
             }
         }
 
-        function callSuccessFunction(request){
+        function callSuccessFunction(request) {
             if (typeof successFunction != "undefined") {
-                var data=request.responseText;
-                if(request.responseText!=""){
-                    data=JSON.parse(request.responseText);
+                var data = request.responseText;
+                if (request.responseText !== "") {
+                    data = JSON.parse(request.responseText);
                 }
                 successFunction(data);
             }
         }
 
-        if(options.method=="POST" && data) {
+        if (options.method === "POST" && data) {
             request.send(data);
-        }else{
+        } else {
             request.send();
         }
 
@@ -102,14 +102,14 @@ var VanillaTools = {
      * @returns {object}
      * @static
      */
-    cloneObject : function(obj) {
+    cloneObject: function (obj) {
         if (obj === null || typeof obj !== 'object') {
             return obj;
         }
 
         var temp = obj.constructor(); // give temp the original obj's constructor
         for (var key in obj) {
-            if (obj.hasOwnProperty(key)){
+            if (obj.hasOwnProperty(key)) {
                 temp[key] = this.cloneObject(obj[key]);
             }
         }
@@ -124,11 +124,12 @@ var VanillaTools = {
      * @author Slavik Meltser (slavik@meltser.info).
      * @static
      */
-    guid : function() {
+    guid: function () {
         function _p8(s) {
-            var p = (Math.random().toString(16)+"000000000").substr(2,8);
-            return s ? "-" + p.substr(0,4) + "-" + p.substr(4,4) : p ;
+            var p = (Math.random().toString(16) + "000000000").substr(2, 8);
+            return s ? "-" + p.substr(0, 4) + "-" + p.substr(4, 4) : p;
         }
+
         return _p8() + _p8(true) + _p8(true) + _p8();
     },
 
@@ -147,26 +148,27 @@ var VanillaTools = {
      * @param {forEachCallback} fn -The callback that handles the response.
      * @static
      */
-    forEach : function(subject, fn) {
+    forEach: function (subject, fn) {
         var fnLength = fn.length;
-        if(Array.isArray(subject)){
-            var i=0;
+        if (Array.isArray(subject)) {
+            var i = 0;
             var length = subject.length;
             for (; i < length; i++) {
                 callFunction(subject[i], i);
             }
-        }else if(typeof subject === "object"){
-            for(var index in subject) {
+        } else if (typeof subject === "object") {
+            for (var index in subject) {
                 if (subject.hasOwnProperty(index)) {
-                    callFunction(subject[index],index)
+                    callFunction(subject[index], index)
                 }
             }
         }
-        function callFunction(row,key){
-            if(fnLength==1){
+
+        function callFunction(row, key) {
+            if (fnLength === 1) {
                 fn(row);
-            }else{
-                fn(key,row);
+            } else {
+                fn(key, row);
             }
         }
     },
@@ -193,9 +195,9 @@ var VanillaTools = {
      * @static
      */
     removeClass: function (element, className) {
-        if(typeof className =="undefined" || !className){
-            element.className="";
-        }else {
+        if (typeof className == "undefined" || !className) {
+            element.className = "";
+        } else {
             if (element.classList) {
                 element.classList.remove(className);
             } else {
@@ -232,7 +234,6 @@ var VanillaTools = {
         }
     },
 
-
     /**
      * Get element has css class
      * @param {object} element - the concerned html element
@@ -248,7 +249,6 @@ var VanillaTools = {
         }
     },
 
-
     /**
      * Toggle two class on a element
      * @param {object} element - the concerned html element
@@ -256,17 +256,28 @@ var VanillaTools = {
      * @param {string} className2 - the second class that will be added/removed
      * @static
      */
-    toggleTwoClass: function (element,className1,className2) {
+    toggleTwoClass: function (element, className1, className2) {
 
-        var removeClass=className1;
-        var addClass=className2;
-        if(this.hasClass(element,className2)){
-            removeClass=className2;
-            addClass=className1;
+        var removeClass = className1;
+        var addClass = className2;
+        if (this.hasClass(element, className2)) {
+            removeClass = className2;
+            addClass = className1;
         }
 
-        this.removeClass(element,removeClass);
-        this.addClass(element,addClass);
+        this.removeClass(element, removeClass);
+        this.addClass(element, addClass);
+    },
+
+    /**
+     * Empty the content of an element
+     * @param {object} element - the concerned html element
+     * @static
+     */
+    emptyElement: function (element) {
+        while (element.firstChild) {
+            element.removeChild(element.firstChild)
+        }
     },
 
     /**
@@ -276,7 +287,7 @@ var VanillaTools = {
      * thanks to {@link https://github.com/knowledgecode/jquery-param}
      * @private
      */
-    _serializeAjaxParameter : function (a) {
+    _serializeAjaxParameter: function (a) {
         var s = [], rbracket = /\[\]$/,
             isArray = function (obj) {
                 return Object.prototype.toString.call(obj) === '[object Array]';
@@ -297,7 +308,9 @@ var VanillaTools = {
                         }
                     } else if (obj && String(obj) === '[object Object]') {
                         for (key in obj) {
-                            buildParams(prefix + '[' + key + ']', obj[key]);
+                            if( obj.hasOwnProperty(key)) {
+                                buildParams(prefix + '[' + key + ']', obj[key]);
+                            }
                         }
                     } else {
                         add(prefix, obj);
@@ -308,7 +321,9 @@ var VanillaTools = {
                     }
                 } else {
                     for (key in obj) {
-                        buildParams(key, obj[key]);
+                        if( obj.hasOwnProperty(key)) {
+                            buildParams(key, obj[key]);
+                        }
                     }
                 }
                 return s;
@@ -321,9 +336,9 @@ var VanillaTools = {
      * Default option for getJson function
      * @private
      */
-    _getJsonDefaultOptions : {
-        data :{},
+    _getJsonDefaultOptions: {
+        data: {},
         method: "POST",
-        async:true
+        async: true
     }
 };
