@@ -1,6 +1,6 @@
-var gulp = require('gulp');
-var requireDir = require('require-dir');
+const gulp = require('gulp');
+const requireDir = require('require-dir');
 requireDir('./gulp/', { recurse: true });
 
-gulp.task('default',['generateDist']);
+gulp.task('default',gulp.parallel('generateDist'));
 

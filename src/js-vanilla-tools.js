@@ -8,7 +8,8 @@
  * Compatibility IE9+
  * @namespace VanillaTools
  * @author Julien Stalder
- * @version 1.4.0
+ * @version 1.5.0
+ * @preserve
  */
 var VanillaTools = {
 
@@ -331,6 +332,39 @@ var VanillaTools = {
 
         return buildParams('', a).join('&').replace(/%20/g, '+');
     },
+
+    /**
+     * Get parent element of type
+     * @param {HTMLElement }elem
+     * @param {string} selector
+     * @return {null|HTMLElement}
+     */
+    getParentElementBySelector : function (elem, selector) {
+
+        // Element.matches() polyfill
+        if (!Element.prototype.matches) {
+            Element.prototype.matches =
+                Element.prototype.matchesSelector ||
+                Element.prototype.mozMatchesSelector ||
+                Element.prototype.msMatchesSelector ||
+                Element.prototype.oMatchesSelector ||
+                Element.prototype.webkitMatchesSelector ||
+                function(s) {
+                    var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+                        i = matches.length;
+                    while (--i >= 0 && matches.item(i) !== this) {}
+                    return i > -1;
+                };
+        }
+
+        // Get the closest matching element
+        for ( ; elem && elem !== document; elem = elem.parentNode ) {
+            if ( elem.matches( selector ) ) return elem;
+        }
+        return null;
+
+    },
+
 
     /**
      * Default option for getJson function

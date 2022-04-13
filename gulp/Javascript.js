@@ -6,7 +6,11 @@ gulp.task('generateDist', function() {
 
     return gulp.src(
         "./src/js-vanilla-tools.js"
-    ).pipe(uglify({preserveComments:"license"}))
+    ).pipe(uglify({
+        output: {
+            comments: 'some'
+        }
+    }))
         .pipe(rename({suffix: ".min"}))
      .pipe(gulp.dest("./dist"));
 });
